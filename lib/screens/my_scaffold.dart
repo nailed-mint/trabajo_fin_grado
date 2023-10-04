@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trabajo_fin_grado/widgets/local_image.dart';
 
 import '../widgets/my_app_bar.dart';
 
@@ -18,14 +19,15 @@ class MyScaffold extends StatelessWidget {
       child: Column(
         children: [
           MyAppBar(title: Text(
-            "MyAppBar",
+            "My App Bar",
             style: Theme.of(context).primaryTextTheme.titleLarge,
           )
           ),
           const Expanded(child: Center(
             child: Text("Hola Mundo"),
           )
-          )
+          ),
+          LocalImage(path: 'assets/jugar_con_el_tablet.png'),
         ],
       ),
     );
