@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:trabajo_fin_grado/screens/my_scaffold.dart';
+import 'package:trabajo_fin_grado/screens/kid_main_menu.dart';
 
 void main() {
   /// Takes the given Widget and makes it the root of the widget tree.
@@ -9,7 +9,7 @@ void main() {
   runApp(
     const MaterialApp(
       title: "My app", // title used by OS's Task Switcher
-      home: SafeArea(child: MyScaffold()),
+      home: SafeArea(child: KidMainMenu()),
     )
   );
 }
