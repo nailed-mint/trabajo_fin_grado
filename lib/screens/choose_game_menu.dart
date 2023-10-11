@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trabajo_fin_grado/main.dart';
-import 'package:trabajo_fin_grado/screens/kid_main_menu.dart';
-
-import '../widgets/navigable_image.dart';
 
 class ChooseGameMenu extends StatelessWidget {
   const ChooseGameMenu({super.key});
@@ -10,9 +6,11 @@ class ChooseGameMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Center(child: const Text("Menú de juegos")),),
-      body: Center(
-        child: const Center(child: const Text("elige un juego")),
+      appBar: AppBar(
+        title: const Text("Menú de juegos"),
+      ),
+      body: const Center(
+        child: Text("elige un juego"),
       ),
     );
   }

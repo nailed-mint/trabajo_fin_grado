@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NavigableImage extends StatelessWidget {
-  const NavigableImage({required this.clickDestination, super.key});
+  const NavigableImage(
+      {required this.clickDestination,
+      required this.path,
+      required this.caption,
+      super.key});
 
   final Widget clickDestination;
+  final String path, caption;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +37,9 @@ class NavigableImage extends StatelessWidget {
                   width: double.infinity,
                   height: 240,
                   fit: BoxFit.cover,
-                  image: const AssetImage(
-                      'assets/jugar_con_el_tablet.png')),
-              const Text(
-                'Jugar',
+                  image: AssetImage(path)),
+              Text(
+                caption,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10)
@@ -45,5 +49,4 @@ class NavigableImage extends StatelessWidget {
       ),
     );
   }
-
 }
