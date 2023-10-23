@@ -40,7 +40,7 @@ class NavigableImage extends StatelessWidget {
                   image: AssetImage(path)),
               Text(
                 caption,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10)
             ],
