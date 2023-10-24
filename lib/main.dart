@@ -1,38 +1,36 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flame/flame.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:trabajo_fin_grado/game.dart';
 import 'package:trabajo_fin_grado/screens/home_page.dart';
 
 /// The main entry point of the application.
-void main() {
-  runApp(const MaterialApp(
-    title: "My app",
-    home: SafeArea(child: MainApp()),
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Flame.device.fullScreen();
+  await Flame.device.setPortrait();
+  FlameAudio.bgm.initialize();
+  runApp(MainApp());
 }
 
 /// The main application widget that provides the app state to its children.
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final MyGame game = MyGame();
+
+  MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MainAppState(),
-      child: MaterialApp(
-        title: "TFG", // Provisional name
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        ),
-        home: HomePage(),
+    return MaterialApp(
+      title: "TFG", // Provisional name
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+      ),
+      home: Scaffold(
+        body: HomePage(),
       ),
     );
   }
-}
-
-/// The application state that holds variables and methods used throughout the app.
-class MainAppState extends ChangeNotifier {
-  // Put here variables that must be notified when changed and are useful for the whole app
-
-  // Put here the necessary methods to work with those variablesimport 'package:provider/provider.dart';
 }

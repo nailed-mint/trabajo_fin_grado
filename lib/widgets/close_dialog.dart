@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flame/flame.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class CloseDialog extends StatelessWidget {
-  const CloseDialog({Key? key}) : super(key: key);
+  const CloseDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Are you sure you want to exit?'),
+      title: const Text('¿Quieres cerrar la aplicación?'),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('Cancel'),
+          child: const Text('No'),
         ),
         TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Exit'),
+          onPressed: () => SystemNavigator.pop(),
+          child: const Text('Sí'),
         ),
       ],
     );

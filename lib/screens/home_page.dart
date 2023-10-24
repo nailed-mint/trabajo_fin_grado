@@ -1,40 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
-import 'package:flame/game/widget/game_widget.dart';
+import 'package:trabajo_fin_grado/widgets/big_button.dart';
+import 'package:flame/flame.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import '../game.dart';
 import 'package:trabajo_fin_grado/screens/kid_main_menu.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState() extends State<HomePage> {
+class HomePage extends StatelessWidget {
   final MyGame game = MyGame();
-  var roleSelected = "kid";
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Widget page;
-    switch(roleSelected) {
-      case "kid":
-        page = const KidMainMenu();
-        break;
-      case "family":
-        // page = FamilyMainMenu();
-        // break;
-      case "professional":
-        // page = ProfessionalMainMenu();
-        // break;
-      default:
-        throw UnimplementedError("no widget for $roleSelected");
-    }
-
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        body: GameWidget<MyGame>(game: game,),
-      );
-    });
+    return const Scaffold(
+      body: Column(
+        children: [
+          BigButton(
+              buttonText: "Niño",
+              imageUrl: "/pictograms/31807",
+              nextPage: KidMainMenu()),
+          BigButton(
+            buttonText: "Familia",
+            imageUrl: "/pictograms/35060",
+            nextPage: KidMainMenu(),
+          ),
+          BigButton(
+            buttonText: "Profesional",
+            imageUrl: "/pictograms/36950",
+            nextPage: KidMainMenu(),
+          ),
+        ],
+      ),
+    );
   }
 }
