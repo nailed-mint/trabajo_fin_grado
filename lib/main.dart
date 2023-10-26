@@ -1,9 +1,7 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:trabajo_fin_grado/game.dart';
-import 'package:trabajo_fin_grado/screens/home_page.dart';
+import 'package:trabajo_fin_grado/screens/menu.dart';
 
 /// The main entry point of the application.
 void main() async {
@@ -11,14 +9,12 @@ void main() async {
   await Flame.device.fullScreen();
   await Flame.device.setPortrait();
   FlameAudio.bgm.initialize();
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 /// The main application widget that provides the app state to its children.
 class MainApp extends StatelessWidget {
-  final MyGame game = MyGame();
-
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +24,8 @@ class MainApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
       ),
-      home: Scaffold(
-        body: HomePage(),
+      home: const Scaffold(
+        body: MenuPage(),
       ),
     );
   }

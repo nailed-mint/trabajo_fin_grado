@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flame/flame.dart';
-import 'package:flame_audio/flame_audio.dart';
 
 class CloseDialog extends StatelessWidget {
   const CloseDialog({super.key});
