@@ -14,33 +14,28 @@
   "kid": {
     "name": "kid",
     "buttonTexts": ["Jugar", "Instrucciones", "Se acabó"],
-    "imageUrls": [
-      "/pictograms/29151",
-      "/pictograms/34705",
-      "/pictograms/28429"
-    ],
+    "imageUrls": ["29151", "34705", "28429"],
     "nextPages": ["play", "instructions", "close"]
   },
   "menu": {
     "name": "menu",
     "buttonTexts": ["Niño", "Familia", "Profesional"],
-    "imageUrls": [
-      "/pictograms/31807",
-      "/pictograms/35060",
-      "/pictograms/36950"
-    ],
+    "imageUrls": ["31807", "35060", "36950"],
     "nextPages": ["kid", "family", "professional"]
   },
   "play": {
     "name": "play",
-    "buttonTexts": [],
-    "imageUrls": [],
-    "nextPages": []
+    "buttonTexts": ["Encuentra las diferencias", "SampleGame2", "SampleGame3"],
+    "imageUrls": ["32792", "25614", "21945"],
+    "nextPages": ["spotTheDifferenceGame", "play", "play"]
   },
   "professional": {
     "name": "professional",
     "buttonTexts": [],
     "imageUrls": [],
     "nextPages": []
+  },
+  "spotTheDifferenceGame": {
+    "name": "spotTheDifferenceGame"
   }
 }

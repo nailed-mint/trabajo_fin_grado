@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flame/flame.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:trabajo_fin_grado/screens/menu.dart';
 
 /// The main entry point of the application.
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Flame.device.fullScreen();
-  await Flame.device.setPortrait();
-  FlameAudio.bgm.initialize();
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

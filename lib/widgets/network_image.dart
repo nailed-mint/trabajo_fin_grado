@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NetImage extends StatelessWidget {
-  final String serverUrl = "http://api.arasaac.org/api";
+  final String serverUrl = "https://api.arasaac.org/api/pictograms/";
   final String imageUrl;
 
   const NetImage({super.key, required this.imageUrl});
