@@ -23,47 +23,42 @@ class _IntroOverlayState extends State<IntroOverlay> {
           ? Theme.of(context).textTheme.displayLarge!
           : Theme.of(context).textTheme.displaySmall!;
 
-      return Material(
-        color: Theme.of(context).colorScheme.background,
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Spot the difference",
-                    style: titleStyle.copyWith(
-                      height: 8,
-                    ),
+      return Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Spot the difference",
+                  style: titleStyle.copyWith(
+                    height: 8,
                   ),
-                  Text(
-                    "Find the differences between the two images",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const Expanded(
-                    child: WhiteSpace(),
-                  ),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        game.start();
-                      },
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                          const Size(100, 50),
-                        ),
-                        textStyle: MaterialStateProperty.all(
-                          Theme.of(context).textTheme.titleLarge,
-                        ),
+                ),
+                Text(
+                  "Find the differences between the two images",
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const WhiteSpace(),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      game.start();
+                    },
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(
+                        const Size(100, 50),
                       ),
-                      child: const Text("Start"),
+                      textStyle: MaterialStateProperty.all(
+                        Theme.of(context).textTheme.titleLarge,
+                      ),
                     ),
+                    child: const Text("Start"),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

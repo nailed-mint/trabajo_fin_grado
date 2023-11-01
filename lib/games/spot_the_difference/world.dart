@@ -10,9 +10,9 @@ class World extends ParallaxComponent<SpotTheDifference>
   Future<void> onLoad() async {
     parallax = await gameRef.loadParallax(
       [
-        ParallaxImageData('assets/images/background/layer-1.png'),
-        ParallaxImageData('assets/images/background/layer-2.png'),
-        ParallaxImageData('assets/images/background/layer-3.png'),
+        ParallaxImageData('background/layer-1.png'),
+        ParallaxImageData('background/layer-2.png'),
+        ParallaxImageData('background/layer-3.png'),
       ],
       fill: LayerFill.width,
       repeat: ImageRepeat.repeat,

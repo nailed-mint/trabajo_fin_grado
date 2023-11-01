@@ -9,12 +9,7 @@ class SpotTheDifferenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Spot the difference',
-      home: SpotTheDifferenceLauncher(
-        title: 'Spot The Difference',
-      ),
-    );
+    return const SpotTheDifferenceLauncher(title: "Spot the Difference");
   }
 }
 
