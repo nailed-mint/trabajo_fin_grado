@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:trabajo_fin_grado/games/spot_the_difference_launcher.dart';
 import 'package:trabajo_fin_grado/widgets/close_dialog.dart';
 import 'package:trabajo_fin_grado/widgets/expanded_button.dart';
+import 'package:trabajo_fin_grado/widgets/info_page.dart';
 import 'package:trabajo_fin_grado/widgets/instructions_page.dart';
 
 /// This widget displays a menu with buttons that navigate to different pages.
@@ -58,7 +59,15 @@ class _MenuPageState extends State<MenuPage> {
                 onPressed: () {
                   _updateProfile(previousProfile.removeLast(), goingBack: true);
                 })
-            : null,
+            : IconButton(
+                onPressed: () {
+                  _updateProfile("info");
+                },
+                icon: const Icon(
+                  Icons.info,
+                  color: Colors.white,
+                  size: 30,
+                )),
       ),
       body: Column(
         children: List.generate(
@@ -106,6 +115,11 @@ class _MenuPageState extends State<MenuPage> {
           builder: (BuildContext context) => const InstructionsPage(),
         );
         break;
+      case "info":
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => const InfoPage(),
+        );
       case "spotTheDifferenceGame":
         Navigator.of(context).push(
           MaterialPageRoute(
