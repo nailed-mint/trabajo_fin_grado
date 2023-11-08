@@ -1,6 +1,5 @@
 import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
-import 'package:flutter/material.dart';
 
 import './spot_the_difference.dart';
 
@@ -14,8 +13,8 @@ class World extends ParallaxComponent<SpotTheDifference>
         ParallaxImageData('background/layer-2.png'),
         ParallaxImageData('background/layer-3.png'),
       ],
-      fill: LayerFill.width,
-      repeat: ImageRepeat.repeat,
+      fill: LayerFill.height,
+      size: Vector2(1920, 1080),
     );
   }
 }

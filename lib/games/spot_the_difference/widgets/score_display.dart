@@ -13,8 +13,16 @@ class ScoreDisplay extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: (game as SpotTheDifference).gameManager.score,
       builder: (context, value, child) {
-        return Text('Score: $value',
-            style: Theme.of(context).textTheme.displaySmall!);
+        return Card(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Score: $value',
+              style: Theme.of(context).textTheme.displaySmall!,
+            ),
+          ),
+        );
       },
     );
   }
