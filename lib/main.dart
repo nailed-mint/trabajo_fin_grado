@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trabajo_fin_grado/screens/menu.dart';
+import 'package:trabajo_fin_grado/menu/menu.dart';
 
 /// The main entry point of the application.
 void main() {

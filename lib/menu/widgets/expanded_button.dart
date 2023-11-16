@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trabajo_fin_grado/widgets/network_image.dart';
+import 'package:trabajo_fin_grado/menu/widgets/network_image.dart';
 
 /// A StatelessWidget that displays an expanded button with an image and text.
 class ExpandedButton extends StatelessWidget {

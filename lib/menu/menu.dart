@@ -4,11 +4,11 @@ import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'package:trabajo_fin_grado/games/spot_the_difference_launcher.dart';
-import 'package:trabajo_fin_grado/widgets/close_dialog.dart';
-import 'package:trabajo_fin_grado/widgets/expanded_button.dart';
-import 'package:trabajo_fin_grado/widgets/info_page.dart';
-import 'package:trabajo_fin_grado/widgets/instructions_page.dart';
+import 'package:trabajo_fin_grado/games/spot_the_difference/spot_the_difference.dart';
+import 'package:trabajo_fin_grado/menu/widgets/close_dialog.dart';
+import 'package:trabajo_fin_grado/menu/widgets/expanded_button.dart';
+import 'package:trabajo_fin_grado/menu/widgets/info_page.dart';
+import 'package:trabajo_fin_grado/menu/widgets/instructions_page.dart';
 
 /// A StatefulWidget that displays a menu with different profiles.
 class MenuPage extends StatefulWidget {
@@ -173,9 +173,7 @@ class _MenuPageState extends State<MenuPage> {
         /// Navigates to the SpotTheDifferenceLauncher page.
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const SpotTheDifferenceLauncher(
-              title: 'Spot The Difference',
-            ),
+            builder: (context) => const SpotTheDifference(),
           ),
         );
         break;
