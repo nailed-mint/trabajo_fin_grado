@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InvisibleButton extends StatefulWidget {
-  const InvisibleButton({super.key});
+  final VoidCallback onButtonPressed;
+
+  const InvisibleButton({super.key, required this.onButtonPressed});
 
   @override
   InvisibleButtonState createState() => InvisibleButtonState();
@@ -9,10 +11,15 @@ class InvisibleButton extends StatefulWidget {
 
 class InvisibleButtonState extends State<InvisibleButton> {
   Color color = Colors.transparent;
+  bool hasBeenPressed = false;
 
   void onPressed() {
     setState(() {
-      color = Colors.red;
+      if (!hasBeenPressed) {
+        widget.onButtonPressed();
+        color = Colors.red;
+        hasBeenPressed = true;
+      }
     });
   }
 

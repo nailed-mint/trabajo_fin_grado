@@ -1,28 +1,256 @@
-import 'package:flutter/material.dart';
-import 'package:trabajo_fin_grado/games/spot_the_difference/widgets/differences_image.dart';
-import 'package:trabajo_fin_grado/games/spot_the_difference/widgets/score_display.dart';
-import 'package:trabajo_fin_grado/games/spot_the_difference/widgets/timer.dart';
+import 'dart:async';
 
-class SpotTheDifference extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:trabajo_fin_grado/games/spot_the_difference/widgets/invisible_button.dart'; // DEBUG
+
+/// Clase que genera la pantalla del juego
+class SpotTheDifference extends StatefulWidget {
   const SpotTheDifference({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
+  SpotTheDifferenceState createState() => SpotTheDifferenceState();
+}
+
+class SpotTheDifferenceState extends State<SpotTheDifference> {
+  final logger = Logger(); // DEBUG
+
+  Duration duration = const Duration();
+  Timer? timer;
+  int score = 0;
+  int touchCount = 0;
+  DateTime now = DateTime.now();
+  DateTime currentBackPressTime = DateTime.now();
+
+  void increaseScore() {
+    setState(() {
+      score += 1;
+    });
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
+  }
+
+  void addTime() {
+    const addSeconds = 1;
+
+    setState(() {
+      final seconds = duration.inSeconds + addSeconds;
+      duration = Duration(seconds: seconds);
+    });
+  }
+
+  void invokePop() {
+    currentBackPressTime = DateTime.now();
+
+    if (currentBackPressTime.difference(now) > const Duration(seconds: 2)) {
+      // If more than 2 seconds have passed since last press, reset counter
+      touchCount = 0;
+    } else {
+      touchCount++;
+    }
+    now = currentBackPressTime;
+    touchCount >= 7 ? Navigator.pop(context) : null;
+  }
+
+  /// Este Widget se usa para abandonar el juego
+  /// Para ello, debe pulsarse 5 veces seguidas
+  /// Cada pulsación no debe tardar más de 2 segundos desde la anterior o,
+  /// de lo contrario, el contador se reiniciará
+  Widget exitButton() {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: TextButton(
+        onPressed: invokePop,
+        child: const Icon(Icons.arrow_back, size: 30),
+      ),
+    );
+  }
+
+  /// Este Widget se usa para mostrar la puntuación (el número de aciertos)
+  Widget scoreDisplay() {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ScoreDisplay(),
-            const Timer(),
-            const DifferencesImage(
-              pathImageA: "assets/images/spot_the_difference/01a.jpg",
-              pathImageB: "assets/images/spot_the_difference/01b.jpg",
+            const Icon(Icons.thumb_up),
+            Text(
+              "\t$score",
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
-            //TODO: Add finish button
           ],
         ),
       ),
     );
   }
+
+  /// Este Widget se usa para mostrar el tiempo transcurrido desde que se inició la partida
+  Widget timeSpentCard() {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+
+    final String minutes = duration.inMinutes.remainder(60).toString();
+    final String seconds = twoDigits(duration.inSeconds.remainder(60));
+
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.timer,
+            ),
+            Text(
+              "\t$minutes:$seconds",
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Crea una columna con las 2 imagenes similares
+  /// La de arriba solo está de referencia
+  /// En la de abajo hay que tocar las diferencias para que queden resaltadas
+  Widget differencesImage(String pathImageA, String pathImageB) {
+    return Center(
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  pathImageA,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                top: 90,
+                left: 50,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+              Positioned(
+                top: 80,
+                left: 160,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+              Positioned(
+                top: 55,
+                left: 135,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+              Positioned(
+                top: 20,
+                left: 90,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+              Positioned(
+                top: 45,
+                left: 180,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+              Positioned(
+                top: 170,
+                left: 190,
+                child: InvisibleButton(
+                  onButtonPressed: increaseScore,
+                ),
+              ),
+            ],
+          ),
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  pathImageB,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    timer?.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) => PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(child: exitButton()),
+                  Expanded(child: scoreDisplay()),
+                  Expanded(child: timeSpentCard()),
+                ],
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Card(
+                      margin: EdgeInsets.all(8),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            "¡Encuentra las # diferencias!",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              differencesImage(
+                "assets/images/spot_the_difference/01a.jpg",
+                "assets/images/spot_the_difference/01b.jpg",
+              ),
+            ],
+          ),
+        ),
+      );
 }
