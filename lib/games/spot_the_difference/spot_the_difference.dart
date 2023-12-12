@@ -18,14 +18,54 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
   Duration duration = const Duration();
   Timer? timer;
   int score = 0;
+  final finalScore = 6;
   int touchCount = 0;
   DateTime now = DateTime.now();
   DateTime currentBackPressTime = DateTime.now();
+
+  void checkEndGame() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          color: Colors.amber,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: score == finalScore
+                  ? <Widget>[
+                      const Text('¡Enhorabuena!'),
+                      ElevatedButton(
+                        child: const Text('Volver al menú'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ]
+                  : <Widget>[
+                      const Text('Todavía te faltan diferencias por encontrar'),
+                      ElevatedButton(
+                        child: const Text('Seguir jugando'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   void increaseScore() {
     setState(() {
       score += 1;
     });
+    score == finalScore ? checkEndGame() : null;
   }
 
   void startTimer() {
@@ -74,17 +114,20 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
       margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.thumb_up),
-            Text(
-              "\t$score",
-              style: const TextStyle(
-                fontSize: 20,
+        child: TextButton(
+          onPressed: checkEndGame,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.thumb_up),
+              Text(
+                "\t$score",
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
