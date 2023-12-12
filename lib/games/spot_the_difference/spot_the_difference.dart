@@ -232,10 +232,47 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  pathImageB,
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => Dialog(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              /// The title of the dialog.
+                              const Text(
+                                "Aquí no",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 16),
+
+                              /// The body of the dialog.
+                              const Text(
+                                "Hay que pulsar la imagen de arriba",
+                                textAlign: TextAlign.justify,
+                              ),
+                              const SizedBox(height: 16),
+
+                              /// An ElevatedButton that can be used to close the dialog or perform another action.
+                              ElevatedButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text("Volver al juego"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Image.asset(
+                    pathImageB,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],
