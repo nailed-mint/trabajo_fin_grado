@@ -59,6 +59,7 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
         );
       },
     );
+    score == finalScore ? stopTimer() : null;
   }
 
   void increaseScore() {
@@ -70,6 +71,10 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
 
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
+  }
+
+  void stopTimer() {
+    timer?.cancel();
   }
 
   void addTime() {
@@ -251,7 +256,7 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
   void dispose() {
     super.dispose();
 
-    timer?.cancel();
+    stopTimer();
   }
 
   @override
