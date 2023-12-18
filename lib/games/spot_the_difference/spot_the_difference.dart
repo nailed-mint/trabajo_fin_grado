@@ -18,12 +18,16 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
   Duration duration = const Duration();
   Timer? timer;
   int score = 0;
+  int errors = 0;
   final finalScore = 6;
   int touchCount = 0;
   DateTime now = DateTime.now();
   DateTime currentBackPressTime = DateTime.now();
 
   void checkEndGame() {
+    if (score == finalScore) {
+      logger.d("score: $score\n errors: $errors");
+    }
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -67,6 +71,12 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
       score += 1;
     });
     score == finalScore ? checkEndGame() : null;
+  }
+
+  void increaseErrors() {
+    setState(() {
+      errors += 1;
+    });
   }
 
   void startTimer() {
@@ -178,10 +188,13 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  pathImageA,
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: increaseErrors,
+                  child: Image.asset(
+                    pathImageA,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Positioned(
