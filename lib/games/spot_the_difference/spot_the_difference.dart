@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:audioplayers/audioplayers.dart';
+
 import 'package:trabajo_fin_grado/games/spot_the_difference/widgets/invisible_button.dart'; // DEBUG
 
 /// Clase que genera la pantalla del juego
@@ -15,6 +17,7 @@ class SpotTheDifference extends StatefulWidget {
 class SpotTheDifferenceState extends State<SpotTheDifference> {
   final logger = Logger(); // DEBUG
 
+  final player = AudioPlayer();
   Duration duration = const Duration();
   Timer? timer;
   int score = 0;
@@ -66,11 +69,14 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
     score == finalScore ? stopTimer() : null;
   }
 
-  void increaseScore() {
+  Future<void> increaseScore() async {
     setState(() {
       score += 1;
     });
     score == finalScore ? checkEndGame() : null;
+    await player.play(
+      AssetSource('audio/sfx/446111__justinvoke__success-jingle.wav'),
+    );
   }
 
   void increaseErrors() {
