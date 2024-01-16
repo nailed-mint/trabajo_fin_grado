@@ -1,6 +1,8 @@
 import 'package:trabajo_fin_grado/Model/user.dart';
 
 class Child extends User {
+  static const String tableName = "child";
+
   int familyId;
   List<int> gameplayId;
   List<int> reportId;

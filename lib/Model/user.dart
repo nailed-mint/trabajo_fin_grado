@@ -5,6 +5,8 @@ enum UserType {
 }
 
 class User {
+  static const String tableName = "user";
+
   int id;
   UserType userType;
   String name;

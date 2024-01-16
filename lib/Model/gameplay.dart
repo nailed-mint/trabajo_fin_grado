@@ -1,4 +1,6 @@
 class Gameplay {
+  static const String tableName = "gameplay";
+
   int id;
   int gameId;
   int childId;

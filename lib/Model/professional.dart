@@ -1,6 +1,8 @@
 import 'package:trabajo_fin_grado/Model/user.dart';
 
 class Professional extends User {
+  static const String tableName = "professional";
+
   String email;
 
   Professional({

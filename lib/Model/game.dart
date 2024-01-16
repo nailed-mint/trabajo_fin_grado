@@ -1,4 +1,6 @@
 class Game {
+  static const String tableName = "game";
+
   int id;
   String name;
   List<int> gameplayId;

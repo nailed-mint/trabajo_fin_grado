@@ -1,4 +1,6 @@
 class Report {
+  static const String tableName = "report";
+
   int id;
   int childId;
   int familyId;

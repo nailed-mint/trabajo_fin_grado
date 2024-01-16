@@ -1,4 +1,6 @@
 class Result {
+  static const String tableName = "result";
+
   int id;
   int gameplayId;
   int reportId;
