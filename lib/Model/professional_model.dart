@@ -1,4 +1,4 @@
-import 'package:trabajo_fin_grado/Model/user.dart';
+import 'package:trabajo_fin_grado/Model/user_model.dart';
 
 class Professional extends User {
   static const String tableName = "professional";
