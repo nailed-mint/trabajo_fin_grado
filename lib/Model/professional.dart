@@ -1,0 +1,19 @@
+import 'package:trabajo_fin_grado/Model/user.dart';
+
+class Professional extends User {
+  String email;
+
+  Professional({
+    super.id,
+    this.email,
+  });
+
+  @override
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> res = super.toMap();
+    res.addAll(<String, dynamic>{
+      "email": email,
+    });
+    return res;
+  }
+}
