@@ -1,22 +1,33 @@
 import 'package:trabajo_fin_grado/Model/user_model.dart';
 
 class Professional extends User {
+  // CLASS ATTRIBUTES ==========================================================
   static const String tableName = "professional";
 
-  String email;
+  // OBJECT ATTRIBUTES =========================================================
+  String _email;
 
+  // CONSTRUCTORS ==============================================================
   Professional({
     required super.id,
     required super.userType,
     required super.name,
     required super.surname,
-    required this.email,
-  }) {
-    if (!isValidEmail(email)) {
-      throw ArgumentError('Invalid email format');
-    }
+    required String email,
+  }) : _email = email;
+
+  // GETTERS ===================================================================
+  String get email => _email;
+
+  // SETTERS ===================================================================
+  // TODO: asegurar la integridad de la base de datos antes de modificar nada
+  set email(String value) {
+    _email = isValidEmail(email)
+        ? value
+        : throw ArgumentError('Invalid email format');
   }
 
+  // METHODS ===================================================================
   bool isValidEmail(String email) {
     final RegExp regex =
         RegExp(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
@@ -27,7 +38,7 @@ class Professional extends User {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> res = super.toMap();
     res.addAll(<String, dynamic>{
-      "email": email,
+      "email": _email,
     });
     return res;
   }

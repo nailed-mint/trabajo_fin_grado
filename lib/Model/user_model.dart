@@ -5,24 +5,55 @@ enum UserType {
 }
 
 class User {
+  // CLASS ATTRIBUTES ==========================================================
   static const String tableName = "user";
 
-  int id;
-  UserType userType;
-  String name;
-  String surname;
+  // OBJECT ATTRIBUTES =========================================================
+  int _id;
+  UserType _userType;
+  String _name;
+  String _surname;
 
+  // CONSTRUCTORS ==============================================================
   User({
-    required this.id,
-    required this.userType,
-    required this.name,
-    required this.surname,
-  });
+    required int id,
+    required UserType userType,
+    required String name,
+    required String surname,
+  })  : _surname = surname,
+        _name = name,
+        _userType = userType,
+        _id = id;
 
+  // GETTERS ===================================================================
+  int get id => _id;
+  UserType get userType => _userType;
+  String get name => _name;
+  String get surname => _surname;
+
+  // SETTERS ===================================================================
+  // TODO: asegurar la integridad de la base de datos antes de modificar nada
+  set id(int value) {
+    _id = value;
+  }
+
+  set userType(UserType value) {
+    _userType = value;
+  }
+
+  set name(String value) {
+    _name = value;
+  }
+
+  set surname(String value) {
+    _surname = value;
+  }
+
+  // METHODS ===================================================================
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "userType": userType.toString(),
-        "name": name,
-        "firstSurname": surname,
+        "id": _id,
+        "userType": _userType.toString(),
+        "name": _name,
+        "firstSurname": _surname,
       };
 }
