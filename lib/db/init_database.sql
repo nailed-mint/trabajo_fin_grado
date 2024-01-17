@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS result (
     -- columns definition
     id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT,
     gameplay_id INTEGER NOT NULL,
-    report_id INTEGER NOT NULL,
+    report_id INTEGER,
     duration INTEGER, -- duration is stored in seconds 
     hits_number INTEGER,
     misses_number INTEGER,
