@@ -7,10 +7,10 @@ class Report {
   List<int> resultId;
 
   Report({
-    this.id,
-    this.childId,
-    this.familyId,
-    this.resultId,
+    required this.id,
+    required this.childId,
+    required this.familyId,
+    required this.resultId,
   });
 
   Map<String, dynamic> toMap() => {

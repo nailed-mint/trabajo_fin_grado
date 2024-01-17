@@ -3,9 +3,13 @@ class Game {
 
   int id;
   String name;
-  List<int> gameplayId;
+  List<int>? gameplayId;
 
-  Game({this.id, this.name, this.gameplayId});
+  Game({
+    required this.id,
+    required this.name,
+    this.gameplayId,
+  });
 
   Map<String, dynamic> toMap() => {
         "id": id,

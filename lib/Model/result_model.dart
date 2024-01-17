@@ -3,25 +3,25 @@ class Result {
 
   int id;
   int gameplayId;
-  int reportId;
-  Duration timeSpent;
+  int? reportId;
+  int duration; // in seconds
   int hitsNumber;
   int missesNumber;
 
   Result({
-    this.id,
-    this.gameplayId,
+    required this.id,
+    required this.gameplayId,
     this.reportId,
-    this.timeSpent,
-    this.hitsNumber,
-    this.missesNumber,
+    required this.duration,
+    required this.hitsNumber,
+    required this.missesNumber,
   });
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "gameplayId": gameplayId,
         "reportId": reportId,
-        "timeSpent": timeSpent,
+        "duration": duration,
         "hitsNumber": hitsNumber,
         "missesNumber": missesNumber,
       };

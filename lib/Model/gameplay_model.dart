@@ -7,10 +7,10 @@ class Gameplay {
   int resultId;
 
   Gameplay({
-    this.id,
-    this.gameId,
-    this.childId,
-    this.resultId,
+    required this.id,
+    required this.gameId,
+    required this.childId,
+    required this.resultId,
   });
 
   Map<String, dynamic> toMap() => {

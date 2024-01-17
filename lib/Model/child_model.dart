@@ -4,12 +4,15 @@ class Child extends User {
   static const String tableName = "child";
 
   int familyId;
-  List<int> gameplayId;
-  List<int> reportId;
+  List<int>? gameplayId;
+  List<int>? reportId;
 
   Child({
-    super.id,
-    this.familyId,
+    required super.id,
+    required super.userType,
+    required super.name,
+    required super.surname,
+    required this.familyId,
     this.gameplayId,
     this.reportId,
   });

@@ -13,15 +13,15 @@ class User {
   String surname;
 
   User({
-    this.id,
-    this.userType,
-    this.name,
-    this.surname,
+    required this.id,
+    required this.userType,
+    required this.name,
+    required this.surname,
   });
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "userType": userType,
+        "userType": userType.toString(),
         "name": name,
         "firstSurname": surname,
       };

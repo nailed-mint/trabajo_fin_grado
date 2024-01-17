@@ -6,9 +6,22 @@ class Professional extends User {
   String email;
 
   Professional({
-    super.id,
-    this.email,
-  });
+    required super.id,
+    required super.userType,
+    required super.name,
+    required super.surname,
+    required this.email,
+  }) {
+    if (!isValidEmail(email)) {
+      throw ArgumentError('Invalid email format');
+    }
+  }
+
+  bool isValidEmail(String email) {
+    final RegExp regex =
+        RegExp(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+    return regex.hasMatch(email);
+  }
 
   @override
   Map<String, dynamic> toMap() {
