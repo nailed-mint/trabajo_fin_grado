@@ -54,6 +54,6 @@ class User {
         "id": _id,
         "userType": _userType.toString(),
         "name": _name,
-        "firstSurname": _surname,
+        "surname": _surname,
       };
 }
