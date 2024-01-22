@@ -4,18 +4,24 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DB {
+  static Database? _database;
+
   static Future<Database> _openDB() async {
+    if (_database != null) return _database!;
+
     String path = join(await getDatabasesPath(), 'database.db');
     String dbCreationScript =
         await File('lib/db/init_database.sql').readAsString();
 
-    return openDatabase(
+    _database = await openDatabase(
       path,
       onCreate: (db, version) {
         return db.execute(dbCreationScript);
       },
       version: 1,
     );
+
+    return _database!;
   }
 
   // CRUD ======================================================================
@@ -80,8 +86,8 @@ class DB {
   // QOL METHODS ===============================================================
   static Map<String, dynamic> _mapFilters({Map<String, dynamic>? filters}) {
     Map<String, dynamic> res = {
-      "where": "",
-      "whereArgs": [],
+      "where": null,
+      "whereArgs": null,
     };
 
     if (filters == null) {

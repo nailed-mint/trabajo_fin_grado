@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS game (
     id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT,
     name TEXT NOT NULL,
     -- table constraints
-    UNIQUE (name) ON CONFLICT ROLLBACK,
+    UNIQUE (name) ON CONFLICT ROLLBACK
 );
 
 CREATE TABLE IF NOT EXISTS gameplay (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS gameplay (
     --table constraints
     FOREIGN KEY (game_id) REFERENCES game (id) ON DELETE CASCADE,
     FOREIGN KEY (child_id) REFERENCES child (id) ON DELETE CASCADE,
-    FOREIGN KEY (result_id) REFERENCES result (id) ON DELETE RESTRICT,
+    FOREIGN KEY (result_id) REFERENCES result (id) ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS result (
@@ -30,17 +30,17 @@ CREATE TABLE IF NOT EXISTS result (
     -- table constraints
     FOREIGN KEY (gameplay_id) REFERENCES gameplay (id) ON DELETE CASCADE,
     FOREIGN KEY (report_id) REFERENCES report (id) ON DELETE CASCADE,
-    CHECK (duration >= 0),
+    CHECK (duration >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS user (
     -- columns definition
     id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT,
-    user_type TEXT,
+    userType TEXT,
     name TEXT NOT NULL,
     surname TEXT NOT NULL,
     -- table constraints
-    CHECK (user_type IN ("child", "family", "professional")),
+    CHECK (userType IN ("child", "family", "professional"))
 );
 
 CREATE TABLE IF NOT EXISTS child (
@@ -49,15 +49,15 @@ CREATE TABLE IF NOT EXISTS child (
     family_id INTEGER,
     -- table constraints
     FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE,
-    FOREIGN KEY (family_id) REFERENCES user (id) ON DELETE SET NULL,
+    FOREIGN KEY (family_id) REFERENCES user (id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS professional (
     -- columns definition
     id INTEGER PRIMARY KEY,
-    email TEXT CHECK(email REGEXP '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'),
+    email TEXT,
     -- table constraints
-    FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE,
+    FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS report (
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS report (
     family_id INTEGER NOT NULL,
     -- table constraints
     FOREIGN KEY (child_id) REFERENCES child (id) ON DELETE CASCADE,
-    FOREIGN KEY (family_id) REFERENCES family (id) ON DELETE CASCADE,
+    FOREIGN KEY (family_id) REFERENCES family (id) ON DELETE CASCADE
 );
 
 
@@ -80,7 +80,7 @@ CREATE TABLE xref_game_gameplay (
     PRIMARY KEY (game_id, gameplay_id) ON CONFLICT ROLLBACK,
     FOREIGN KEY (game_id) REFERENCES game (id) ON DELETE CASCADE,
     FOREIGN KEY (gameplay_id) REFERENCES gameplay (id) ON DELETE CASCADE,
-    UNIQUE (gameplay_id) ON CONFLICT ROLLBACK,
+    UNIQUE (gameplay_id) ON CONFLICT ROLLBACK
 );
 
 CREATE TABLE xref_child_gameplay (
@@ -91,7 +91,7 @@ CREATE TABLE xref_child_gameplay (
     PRIMARY KEY (child_id, gameplay_id) ON CONFLICT ROLLBACK,
     FOREIGN KEY (child_id) REFERENCES child (id) ON DELETE CASCADE,
     FOREIGN KEY (gameplay_id) REFERENCES gameplay (id) ON DELETE CASCADE,
-    UNIQUE (gameplay_id) ON CONFLICT ROLLBACK,
+    UNIQUE (gameplay_id) ON CONFLICT ROLLBACK
 );
 
 CREATE TABLE xref_child_report (
@@ -102,7 +102,7 @@ CREATE TABLE xref_child_report (
     PRIMARY KEY (child_id, report_id) ON CONFLICT ROLLBACK,
     FOREIGN KEY (child_id) REFERENCES child (id) ON DELETE CASCADE,
     FOREIGN KEY (report_id) REFERENCES report (id) ON DELETE CASCADE,
-    UNIQUE (report_id) ON CONFLICT ROLLBACK,
+    UNIQUE (report_id) ON CONFLICT ROLLBACK
 );
 
 CREATE TABLE xref_family_report (
@@ -113,7 +113,7 @@ CREATE TABLE xref_family_report (
     PRIMARY KEY (family_id, report_id) ON CONFLICT ROLLBACK,
     FOREIGN KEY (family_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (report_id) REFERENCES report (id) ON DELETE CASCADE,
-    UNIQUE (report_id) ON CONFLICT ROLLBACK,
+    UNIQUE (report_id) ON CONFLICT ROLLBACK
 );
 
 CREATE TABLE xref_report_result (
@@ -124,10 +124,12 @@ CREATE TABLE xref_report_result (
     PRIMARY KEY (report_id, result_id) ON CONFLICT ROLLBACK,
     FOREIGN KEY (report_id) REFERENCES report (id) ON DELETE CASCADE,
     FOREIGN KEY (result_id) REFERENCES result (id) ON DELETE RESTRICT,
-    UNIQUE (result_id) ON CONFLICT ROLLBACK,
+    UNIQUE (result_id) ON CONFLICT ROLLBACK
 );
 
--- TRIGGERS ===================================================================
+
+-- TODO: migrate triggers to dart models, they cannot be made like that in sqlite :(
+/* -- TRIGGERS ===================================================================
 
 -- GAME TABLE
 
@@ -136,43 +138,74 @@ CREATE TABLE xref_report_result (
 -- RESULT TABLE
 
 -- USER TABLE
-CREATE TRIGGER IF NOT EXISTS prevent_user_type_update
-BEFORE UPDATE OF user_type ON user
+CREATE TRIGGER IF NOT EXISTS prevent_userType_update
+BEFORE UPDATE OF userType ON user
 FOR EACH ROW
 BEGIN
-    SELECT RAISE(ROLLBACK, 'Update of column "user_type" is not allowed');
+    SELECT RAISE(ROLLBACK, 'Update of column "userType" is not allowed');
 END;
 
 -- CHILD TABLE
-CREATE TRIGGER IF NOT EXISTS ensure_family_user_type
-BEFORE INSERT OR UPDATE OF family_id ON child
+CREATE TRIGGER IF NOT EXISTS ensure_family_userType_insert
+BEFORE INSERT OF family_id ON child
 FOR EACH ROW
 BEGIN
     SELECT CASE
-        WHEN ((SELECT user_type FROM user WHERE id = NEW.family_id) != 'family') THEN
+        WHEN ((SELECT userType FROM user WHERE id = NEW.family_id) != 'family') THEN
             RAISE(ROLLBACK, 'family_id must reference a user of type "family"')
     END;
 END;
 
-CREATE TRIGGER IF NOT EXISTS ensure_child_user_type
-BEFORE INSERT OR UPDATE OF id ON child
+CREATE TRIGGER IF NOT EXISTS ensure_family_userType_update
+BEFORE UPDATE OF family_id ON child
 FOR EACH ROW
 BEGIN
     SELECT CASE
-        WHEN ((SELECT user_type FROM user WHERE id = NEW.id) != 'child') THEN
+        WHEN ((SELECT userType FROM user WHERE id = NEW.family_id) != 'family') THEN
+            RAISE(ROLLBACK, 'family_id must reference a user of type "family"')
+    END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS ensure_child_userType_insert
+BEFORE INSERT OF id ON child
+FOR EACH ROW
+BEGIN
+    SELECT CASE
+        WHEN ((SELECT userType FROM user WHERE id = NEW.id) != 'child') THEN
+            RAISE(ROLLBACK, 'id must reference a user of type "child"')
+    END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS ensure_child_userType_update
+BEFORE UPDATE OF id ON child
+FOR EACH ROW
+BEGIN
+    SELECT CASE
+        WHEN ((SELECT userType FROM user WHERE id = NEW.id) != 'child') THEN
             RAISE(ROLLBACK, 'id must reference a user of type "child"')
     END;
 END;
 
 -- PROFESSIONAL TABLE
-CREATE TRIGGER IF NOT EXISTS ensure_professional_user_type
-BEFORE INSERT OR UPDATE OF id ON professional
+CREATE TRIGGER IF NOT EXISTS ensure_professional_userType_insert
+BEFORE INSERT OF id ON professional
 FOR EACH ROW
 BEGIN
     SELECT CASE
-        WHEN ((SELECT user_type FROM user WHERE id = NEW.id) != 'professional') THEN
+        WHEN ((SELECT userType FROM user WHERE id = NEW.id) != 'professional') THEN
+            RAISE(ROLLBACK, 'id must reference a user of type "professional"')
+    END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS ensure_professional_userType_update
+BEFORE UPDATE OF id ON professional
+FOR EACH ROW
+BEGIN
+    SELECT CASE
+        WHEN ((SELECT userType FROM user WHERE id = NEW.id) != 'professional') THEN
             RAISE(ROLLBACK, 'id must reference a user of type "professional"')
     END;
 END;
 
 -- REPORT TABLE
+ */
