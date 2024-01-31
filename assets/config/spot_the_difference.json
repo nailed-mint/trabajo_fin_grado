@@ -1,0 +1,64 @@
+{
+  "levels": [
+    {
+      "pathImageA": "assets/images/spot_the_difference/01a.jpg",
+      "pathImageB": "assets/images/spot_the_difference/01b.jpg",
+      "differences": [
+        {
+          "top": 90,
+          "left": 50
+        },
+        {
+          "top": 80,
+          "left": 160
+        },
+        {
+          "top": 55,
+          "left": 135
+        },
+        {
+          "top": 20,
+          "left": 90
+        },
+        {
+          "top": 45,
+          "left": 180
+        },
+        {
+          "top": 170,
+          "left": 190
+        }
+      ]
+    },
+    {
+      "pathImageA": "assets/images/spot_the_difference/02a.jpg",
+      "pathImageB": "assets/images/spot_the_difference/02b.jpg",
+      "differences": [
+        {
+          "top": 140,
+          "left": 35
+        },
+        {
+          "top": 135,
+          "left": 125
+        },
+        {
+          "top": 180,
+          "left": 80
+        },
+        {
+          "top": 190,
+          "left": 140
+        },
+        {
+          "top": 170,
+          "left": 170
+        },
+        {
+          "top": 45,
+          "left":105
+        }
+      ]
+    }
+  ]
+}
