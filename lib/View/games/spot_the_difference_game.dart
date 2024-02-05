@@ -291,15 +291,11 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-
-              /// The body of the dialog.
               const Text(
                 "¡Enhorabuena! Has conseguido encontrar todas las diferencias",
                 textAlign: TextAlign.justify,
               ),
               const SizedBox(height: 16),
-
-              /// An ElevatedButton that can be used to close the dialog or perform another action.
               ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text("Cerrar"),
@@ -326,15 +322,11 @@ class SpotTheDifferenceState extends State<SpotTheDifference> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-
-              /// The body of the dialog.
               Text(
                 "Todavía te quedan ${finalScore - score} diferencias por encontrar",
                 textAlign: TextAlign.justify,
               ),
               const SizedBox(height: 16),
-
-              /// An ElevatedButton that can be used to close the dialog or perform another action.
               ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text("Volver al juego"),

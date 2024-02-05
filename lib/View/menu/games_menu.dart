@@ -25,8 +25,7 @@ class GamesMenu extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const SpotTheDifference(), // FIXME: change to spot the difference game
+                      builder: (context) => const SpotTheDifference(),
                     ),
                   ),
                   child: Center(
