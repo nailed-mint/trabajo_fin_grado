@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trabajo_fin_grado/Model/user_model.dart';
+import 'package:trabajo_fin_grado/View/menu/choose_profile_menu.dart';
 import 'package:trabajo_fin_grado/View/menu/profile_menu.dart';
+import 'package:trabajo_fin_grado/session.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => Session<User>(),
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -16,7 +23,8 @@ class MainApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
       ),
-      home: const ProfileMenu(),
+      home: const ChooseProfileMenu(),
+      // home: const ProfileMenu(),
     );
   }
 }

@@ -71,10 +71,11 @@ flutter:
     - assets/
     - assets/audio/music/
     - assets/audio/sfx/
+    - assets/config/
+    - assets/db/
     - assets/images/pictograms/
     - assets/images/logo/
     - assets/images/spot_the_difference/
-    - assets/config/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -2,8 +2,8 @@ import 'package:trabajo_fin_grado/Model/child_model.dart';
 import 'package:trabajo_fin_grado/Model/user_model.dart';
 import 'package:trabajo_fin_grado/db/db.dart';
 
-Future<Child> createChild(Map<String, dynamic> child) async {
-  DB.insert(table: Child.tableName, item: child);
+Future<Child> createChild({required Map<String, dynamic> child}) async {
+  DB.create(table: Child.tableName, item: child);
 
   return Child(
     id: child["id"],
@@ -16,30 +16,40 @@ Future<Child> createChild(Map<String, dynamic> child) async {
   );
 }
 
-Future<Child> readChild(Map<String, dynamic> filters) async {
-  List<Map<String, Object?>> queryResult = await DB.list(
+Future<List<Child>> listChild({Map<String, dynamic>? filters}) async {
+  List<Map<String, dynamic>> queryResult = await DB.read(
+    table: Child.tableName,
+    filters: filters,
+  );
+
+  List<Child> result = [];
+
+  for (Map<String, Object?> item in queryResult) {
+    result.add(Child.fromMap(item));
+  }
+
+  return result;
+}
+
+Future<Child> readChild({Map<String, dynamic>? filters}) async {
+  List<Map<String, Object?>> queryResult = await DB.read(
     table: Child.tableName,
     filters: filters,
     limit: 1,
   );
   Map<String, dynamic> res = queryResult[0];
 
-  return Child(
-    id: res["id"],
-    userType: res["userType"],
-    name: res["name"],
-    surname: res["surname"],
-    familyId: res["familyId"],
-    gameplayId: res["gameplayId"],
-    reportId: res["reportId"],
-  );
+  return Child.fromMap(res);
 }
 
-Future<Child> updateChild(int childId, Map<String, dynamic> changes) async {
+Future<Child> updateChild({
+  required int childId,
+  required Map<String, dynamic> changes,
+}) async {
   Map<String, int> filters = {"id": childId};
   DB.update(table: Child.tableName, values: changes, filters: filters);
 
-  List<Map<String, dynamic>> mappedChild = await DB.list(
+  List<Map<String, dynamic>> mappedChild = await DB.read(
     table: Child.tableName,
     filters: filters,
     limit: 1,
@@ -58,6 +68,6 @@ Future<Child> updateChild(int childId, Map<String, dynamic> changes) async {
   );
 }
 
-void deleteChild(int childId) {
+void deleteChild({required int childId}) {
   DB.delete(table: Child.tableName, filters: {"id": childId});
 }

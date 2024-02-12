@@ -1,7 +1,9 @@
-import 'dart:io';
-import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
+final logger = Logger();
 
 class DB {
   static Database? _database;
@@ -11,12 +13,17 @@ class DB {
 
     String path = join(await getDatabasesPath(), 'database.db');
     String dbCreationScript =
-        await File('lib/db/init_database.sql').readAsString();
+        await rootBundle.loadString('assets/db/init_database.sql');
 
     _database = await openDatabase(
       path,
-      onCreate: (db, version) {
-        return db.execute(dbCreationScript);
+      onCreate: (db, version) async {
+        try {
+          await db.execute(dbCreationScript);
+          logger.i('Database created successfully');
+        } catch (e) {
+          logger.e('Error creating database: $e');
+        }
       },
       version: 1,
     );
@@ -25,7 +32,7 @@ class DB {
   }
 
   // CRUD ======================================================================
-  static Future<void> insert({
+  static Future<void> create({
     required String table,
     required Map<String, dynamic> item,
   }) async {
@@ -34,7 +41,7 @@ class DB {
     await database.insert(table, item);
   }
 
-  static Future<List<Map<String, dynamic>>> list({
+  static Future<List<Map<String, dynamic>>> read({
     required String table,
     Map<String, dynamic>? filters,
     int? limit,

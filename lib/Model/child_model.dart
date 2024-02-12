@@ -22,6 +22,17 @@ class Child extends User {
         _gameplayId = gameplayId,
         _familyId = familyId;
 
+  Child.fromMap(Map<String, dynamic> map)
+      : _familyId = map['familyId'],
+        _gameplayId = map['gameplayId'],
+        _reportId = map['reportId'],
+        super(
+          id: map['id'],
+          userType: map['userType'],
+          name: map['name'],
+          surname: map['surname'],
+        );
+
   // GETTERS ===================================================================
   int get familyId => _familyId;
   List<int>? get gameplayId => _gameplayId;
