@@ -1,13 +1,13 @@
 -- TABLES =====================================================================
 CREATE TABLE IF NOT EXISTS game (
     -- columns definition
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     name TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS gameplay (
     -- columns definition
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     game_id INTEGER NOT NULL,
     child_id INTEGER NOT NULL,
     result_id INTEGER NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS gameplay (
 
 CREATE TABLE IF NOT EXISTS result (
     -- columns definition
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     gameplay_id INTEGER NOT NULL,
     report_id INTEGER,
     duration INTEGER, -- duration is stored in seconds 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS result (
 
 CREATE TABLE IF NOT EXISTS user (
     -- columns definition
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     userType TEXT,
     name TEXT NOT NULL,
     surname TEXT NOT NULL
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS professional (
 
 CREATE TABLE IF NOT EXISTS report (
     -- columns definition
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     child_id INTEGER NOT NULL,
     family_id INTEGER NOT NULL,
     -- table constraints
