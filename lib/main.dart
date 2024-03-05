@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:trabajo_fin_grado/Model/user_model.dart';
-import 'package:trabajo_fin_grado/View/menu/choose_profile_menu.dart';
-import 'package:trabajo_fin_grado/View/menu/profile_menu.dart';
-import 'package:trabajo_fin_grado/session.dart';
+import 'package:tfg_redesign/screens/welcome.dart';
 
-void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => Session<User>(),
-    child: const MainApp(),
-  ));
+void main() async {
+  runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  MainAppState createState() => MainAppState();
+}
+
+class MainAppState extends State<MainApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "TFG", // Provisional name
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
       ),
-      home: const ChooseProfileMenu(),
-      // home: const ProfileMenu(),
+      home: const Scaffold(
+        body: Center(
+          child: WelcomeScreen(),
+        ),
+      ),
     );
   }
 }
