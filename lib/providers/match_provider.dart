@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
-import 'package:tfg_redesign/models/match.dart';
-import 'package:tfg_redesign/services/database_service.dart';
+import 'package:trabajo_fin_grado/models/match.dart';
+import 'package:trabajo_fin_grado/services/database_service.dart';
 
 class MatchProvider {
   final tableName = 'match';

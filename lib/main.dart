@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/screens/welcome.dart';
+import 'package:trabajo_fin_grado/screens/welcome.dart';
 
 void main() async {
   runApp(const MainApp());

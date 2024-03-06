@@ -1,10 +1,10 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:tfg_redesign/providers/user_provider.dart';
-import 'package:tfg_redesign/providers/game_provider.dart';
-import 'package:tfg_redesign/providers/match_provider.dart';
-import 'package:tfg_redesign/providers/report_provider.dart';
+import 'package:trabajo_fin_grado/providers/user_provider.dart';
+import 'package:trabajo_fin_grado/providers/game_provider.dart';
+import 'package:trabajo_fin_grado/providers/match_provider.dart';
+import 'package:trabajo_fin_grado/providers/report_provider.dart';
 
 class DatabaseService {
   Database? _database;
@@ -18,7 +18,7 @@ class DatabaseService {
   }
 
   Future<String> get fullPath async {
-    const name = 'tfg_redesign.db';
+    const name = 'trabajo_fin_grado.db';
     final path = await getDatabasesPath();
     return join(path, name);
   }

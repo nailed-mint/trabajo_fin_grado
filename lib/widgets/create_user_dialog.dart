@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/user.dart';
+import 'package:trabajo_fin_grado/models/user.dart';
 
 class CreateUserWidget extends StatefulWidget {
   final User? user;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/game.dart';
-import 'package:tfg_redesign/providers/game_provider.dart';
-import 'package:tfg_redesign/services/arasaac_service.dart';
-import 'package:tfg_redesign/widgets/show_game_info.dart';
-import 'package:tfg_redesign/widgets/sidenav_drawer.dart';
+import 'package:trabajo_fin_grado/models/game.dart';
+import 'package:trabajo_fin_grado/providers/game_provider.dart';
+import 'package:trabajo_fin_grado/services/arasaac_service.dart';
+import 'package:trabajo_fin_grado/widgets/show_game_info.dart';
+import 'package:trabajo_fin_grado/widgets/sidenav_drawer.dart';
 
 class GameSelector extends StatefulWidget {
   const GameSelector({super.key});

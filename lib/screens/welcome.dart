@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/widgets/about_dialog.dart';
-import 'package:tfg_redesign/widgets/sidenav_drawer.dart';
+import 'package:trabajo_fin_grado/widgets/about_dialog.dart';
+import 'package:trabajo_fin_grado/widgets/sidenav_drawer.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/screens/data_list.dart';
-import 'package:tfg_redesign/screens/game_selector.dart';
+import 'package:trabajo_fin_grado/screens/data_list.dart';
+import 'package:trabajo_fin_grado/screens/game_selector.dart';
 
 class SidenavDrawer extends StatelessWidget {
   const SidenavDrawer({super.key});

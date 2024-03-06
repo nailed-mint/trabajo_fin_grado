@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/match.dart';
-import 'package:tfg_redesign/providers/match_provider.dart';
-import 'package:tfg_redesign/utils/json_util.dart';
-import 'package:tfg_redesign/widgets/invisible_button.dart';
+import 'package:trabajo_fin_grado/models/match.dart';
+import 'package:trabajo_fin_grado/providers/match_provider.dart';
+import 'package:trabajo_fin_grado/utils/json_util.dart';
+import 'package:trabajo_fin_grado/widgets/invisible_button.dart';
 
 class SpotTheDifferenceBoard extends StatefulWidget {
   const SpotTheDifferenceBoard({super.key});

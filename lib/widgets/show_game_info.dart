@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/game.dart';
-import 'package:tfg_redesign/screens/game_board.dart';
-import 'package:tfg_redesign/screens/std_board.dart';
-import 'package:tfg_redesign/services/arasaac_service.dart';
+import 'package:trabajo_fin_grado/models/game.dart';
+import 'package:trabajo_fin_grado/screens/game_board.dart';
+import 'package:trabajo_fin_grado/screens/std_board.dart';
+import 'package:trabajo_fin_grado/services/arasaac_service.dart';
 
 class ShowGameInfo extends StatefulWidget {
   final Game game;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/report.dart';
+import 'package:trabajo_fin_grado/models/report.dart';
 
 class ShowReportInfo extends StatelessWidget {
   final Report report;

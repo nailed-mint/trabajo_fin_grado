@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/game.dart';
-import 'package:tfg_redesign/models/match.dart';
-import 'package:tfg_redesign/models/report.dart';
-import 'package:tfg_redesign/models/user.dart';
-import 'package:tfg_redesign/providers/user_provider.dart';
-import 'package:tfg_redesign/providers/game_provider.dart';
-import 'package:tfg_redesign/providers/match_provider.dart';
-import 'package:tfg_redesign/providers/report_provider.dart';
-import 'package:tfg_redesign/widgets/create_user_dialog.dart';
-import 'package:tfg_redesign/widgets/show_game_info.dart';
-import 'package:tfg_redesign/widgets/show_match_dialog.dart';
-import 'package:tfg_redesign/widgets/show_report_dialog.dart';
-import 'package:tfg_redesign/widgets/sidenav_drawer.dart';
+import 'package:trabajo_fin_grado/models/game.dart';
+import 'package:trabajo_fin_grado/models/match.dart';
+import 'package:trabajo_fin_grado/models/report.dart';
+import 'package:trabajo_fin_grado/models/user.dart';
+import 'package:trabajo_fin_grado/providers/user_provider.dart';
+import 'package:trabajo_fin_grado/providers/game_provider.dart';
+import 'package:trabajo_fin_grado/providers/match_provider.dart';
+import 'package:trabajo_fin_grado/providers/report_provider.dart';
+import 'package:trabajo_fin_grado/widgets/create_user_dialog.dart';
+import 'package:trabajo_fin_grado/widgets/show_game_info.dart';
+import 'package:trabajo_fin_grado/widgets/show_match_dialog.dart';
+import 'package:trabajo_fin_grado/widgets/show_report_dialog.dart';
+import 'package:trabajo_fin_grado/widgets/sidenav_drawer.dart';
 
 class DataList extends StatefulWidget {
   const DataList({super.key});

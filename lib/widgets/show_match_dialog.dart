@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tfg_redesign/models/match.dart';
+import 'package:trabajo_fin_grado/models/match.dart';
 
 class ShowMatchInfo extends StatelessWidget {
   final Match match;

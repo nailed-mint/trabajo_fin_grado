@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
-import 'package:tfg_redesign/models/report.dart';
-import 'package:tfg_redesign/services/database_service.dart';
+import 'package:trabajo_fin_grado/models/report.dart';
+import 'package:trabajo_fin_grado/services/database_service.dart';
 
 class ReportProvider {
   final tableName = 'report';
