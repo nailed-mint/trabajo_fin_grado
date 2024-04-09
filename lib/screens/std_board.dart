@@ -200,11 +200,11 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
       hits++;
     });
 
-    checkEndGame()
-        ? await endGame()
-        : await audioPlayer.play(
-            AssetSource('sfx/607207__fupicat__congrats.wav'),
-          );
+    checkEndGame() ? await endGame() : null;
+
+    await audioPlayer.play(
+      AssetSource('sfx/607207__fupicat__congrats.wav'),
+    );
   }
 
   Future<void> increaseErrors() async {
@@ -261,6 +261,7 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
   }
 
   Future<void> endGame() async {
+    stopTimer();
     await audioPlayer.play(
       AssetSource('sfx/607207__fupicat__congrats.wav'),
     );
