@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trabajo_fin_grado/models/game.dart';
 import 'package:trabajo_fin_grado/screens/game_board.dart';
+import 'package:trabajo_fin_grado/screens/mts_board.dart';
 import 'package:trabajo_fin_grado/screens/std_board.dart';
 import 'package:trabajo_fin_grado/services/arasaac_service.dart';
 
@@ -51,6 +52,13 @@ class _ShowGameInfoState extends State<ShowGameInfo> {
           context,
           MaterialPageRoute(
             builder: (context) => const SpotTheDifferenceBoard(),
+          ),
+        );
+      case 2:
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MatchTheSilhouetteBoard(),
           ),
         );
       default:

@@ -24,5 +24,6 @@ flutter:
     - assets/
     - assets/img/
     - assets/img/std/
+    - assets/img/mts/
     - assets/json/
     - assets/sfx/
