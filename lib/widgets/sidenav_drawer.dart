@@ -22,18 +22,6 @@ class SidenavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text("Selector de perfil"),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    "[WIP] Todavía no implementado",
-                  ),
-                ),
-              );
-            },
-          ),
-          ListTile(
             title: const Text("Selector de juego"),
             onTap: () {
               Navigator.push(
