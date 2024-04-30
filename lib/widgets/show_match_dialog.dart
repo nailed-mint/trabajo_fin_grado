@@ -18,10 +18,10 @@ class ShowMatchInfo extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(match.id.toString()),
-            Text(match.duration.toString()),
-            Text(match.hits.toString()),
-            Text(match.errors.toString()),
+            Text("id: ${match.id.toString()}"),
+            Text("duration: ${match.duration.toString()}"),
+            Text("hits: ${match.hits.toString()}"),
+            Text("errors: ${match.errors.toString()}"),
           ],
         ),
       ),

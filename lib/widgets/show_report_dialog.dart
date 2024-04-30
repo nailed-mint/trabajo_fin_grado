@@ -18,8 +18,8 @@ class ShowReportInfo extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(report.id.toString()),
-            Text(report.userId.toString())
+            Text("id: ${report.id.toString()}"),
+            Text("userId: ${report.userId.toString()}")
           ],
         ),
       ),
