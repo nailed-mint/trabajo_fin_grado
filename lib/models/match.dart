@@ -24,7 +24,7 @@ class Match {
         gameId: map['gameId']?.toInt() ?? 0,
         reportId: map['reportId']?.toInt() ?? 0,
         duration: map['duration']?.toInt() ?? -1,
-        hits: map['duration']?.toInt() ?? 0,
+        hits: map['hits']?.toInt() ?? 0,
         errors: map['errors']?.toInt() ?? 0,
       );
 
