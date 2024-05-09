@@ -47,7 +47,15 @@ class _GameSelectorState extends State<GameSelector> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          final games = snapshot.data!;
+          if (snapshot.hasError) {
+            // Handle the error appropriately.
+            // For example, you might want to show an error message.
+            return Text('An error occurred: ${snapshot.error}\n');
+          }
+
+          List? data = snapshot.data;
+          data ??= [];
+          final games = data;
 
           return games.isEmpty
               ? const Center(
