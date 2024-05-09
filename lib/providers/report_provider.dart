@@ -10,10 +10,8 @@ class ReportProvider {
     await database.execute("""
       CREATE TABLE IF NOT EXISTS $tableName (
         'id' INTEGER,
-        'userId' INTEGER,
-        'emissionDate' TEXT,
-        PRIMARY KEY('id' AUTOINCREMENT),
-        FOREIGN KEY('userId') REFERENCES 'user'('id')
+        'userName' TEXT,
+        PRIMARY KEY('id' AUTOINCREMENT)
       );
       """);
   }

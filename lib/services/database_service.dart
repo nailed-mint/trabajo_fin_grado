@@ -1,7 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:trabajo_fin_grado/providers/user_provider.dart';
 import 'package:trabajo_fin_grado/providers/game_provider.dart';
 import 'package:trabajo_fin_grado/providers/match_provider.dart';
 import 'package:trabajo_fin_grado/providers/report_provider.dart';
@@ -35,12 +34,10 @@ class DatabaseService {
   }
 
   Future<void> create(Database database, int version) async {
-    await UserProvider().createTable(database);
     await GameProvider().createTable(database);
     await ReportProvider().createTable(database);
     await MatchProvider().createTable(database);
 
-    await UserProvider().insertStaticData(database);
     await GameProvider().insertStaticData(database);
   }
 }

@@ -10,14 +10,13 @@ class MatchProvider {
     await database.execute("""
     CREATE TABLE IF NOT EXISTS $tableName (
       'id' INTEGER,
-      'userId' INTEGER,
+      'createdOn' INTEGER DEFAULT (strftime('%s', 'now')),
       'gameId' INTEGER,
       'reportId' INTEGER,
       'duration' INTEGER,
       'hits' INTEGER,
       'errors' INTEGER,
       PRIMARY KEY('id' AUTOINCREMENT),
-      FOREIGN KEY('userId') REFERENCES 'user'('id'),
       FOREIGN KEY('gameId') REFERENCES 'game'('id'),
       FOREIGN KEY('reportId') REFERENCES 'report'('id')
     );

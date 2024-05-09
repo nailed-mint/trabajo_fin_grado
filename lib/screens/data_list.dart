@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:trabajo_fin_grado/models/game.dart';
 import 'package:trabajo_fin_grado/models/match.dart';
 import 'package:trabajo_fin_grado/models/report.dart';
-import 'package:trabajo_fin_grado/models/user.dart';
-import 'package:trabajo_fin_grado/providers/user_provider.dart';
 import 'package:trabajo_fin_grado/providers/game_provider.dart';
 import 'package:trabajo_fin_grado/providers/match_provider.dart';
 import 'package:trabajo_fin_grado/providers/report_provider.dart';
@@ -21,11 +19,9 @@ class DataList extends StatefulWidget {
 }
 
 class _DataListState extends State<DataList> {
-  Future<List<User>>? futureUsers;
   Future<List<Game>>? futureGames;
   Future<List<Match>>? futureMatches;
   Future<List<Report>>? futureReports;
-  final userProvider = UserProvider();
   final gameProvider = GameProvider();
   final matchProvider = MatchProvider();
   final reportProvider = ReportProvider();
@@ -39,7 +35,6 @@ class _DataListState extends State<DataList> {
 
   void readAll() {
     setState(() {
-      futureUsers = userProvider.readAll();
       futureGames = gameProvider.readAll();
       futureMatches = matchProvider.readAll();
       futureReports = reportProvider.readAll();
@@ -49,16 +44,13 @@ class _DataListState extends State<DataList> {
   @override
   Widget build(BuildContext context) => DefaultTabController(
         initialIndex: 0,
-        length: 4,
+        length: 3,
         child: Scaffold(
           drawer: const SidenavDrawer(),
           appBar: AppBar(
             title: const Text('Visualización de Datos'),
             bottom: const TabBar(
               tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.person),
-                ),
                 Tab(
                   icon: Icon(Icons.gamepad),
                 ),
@@ -74,9 +66,6 @@ class _DataListState extends State<DataList> {
           body: TabBarView(
             children: <Widget>[
               Center(
-                child: userList(),
-              ),
-              Center(
                 child: gameList(),
               ),
               Center(
@@ -87,45 +76,7 @@ class _DataListState extends State<DataList> {
               ),
             ],
           ),
-          floatingActionButton: createUserButton(context),
-        ),
-      );
-
-  FutureBuilder<List<User>> userList() {
-    return FutureBuilder<List<User>>(
-      future: futureUsers,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          final users = snapshot.data!;
-
-          return users.isEmpty
-              ? const Center(
-                  child: Text(
-                    "No hay usuarios",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-                  ),
-                )
-              : ListView.separated(
-                  itemBuilder: (context, index) {
-                    final user = users[index];
-                    final subtitle = user.type;
-
-                    return ListTile(
-                      title: Text(
-                        user.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(subtitle.toString()),
-                      trailing: IconButton(
-                        onPressed: () async {
-                          await userProvider.delete(user.id!);
-                          readAll();
-                        },
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                      ),
-                      onTap: () {
+          floatingActionButton: refreshDataList(context),
                         showDialog(
                           context: context,
                           builder: (context) => CreateUserWidget(
@@ -264,7 +215,7 @@ class _DataListState extends State<DataList> {
 
                     return ListTile(
                       title: Text(
-                        report.userId.toString(),
+                        "userName: ${report.userName.toString()}",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(report.id.toString()),
@@ -285,26 +236,11 @@ class _DataListState extends State<DataList> {
     );
   }
 
-  FloatingActionButton createUserButton(BuildContext context) {
+  FloatingActionButton refreshDataList(BuildContext context) {
     return FloatingActionButton(
-      child: const Icon(Icons.add),
+      child: const Icon(Icons.refresh),
       onPressed: () {
-        showDialog(
-          context: context,
-          builder: (_) => CreateUserWidget(
-            onSubmit: (name, type) async {
-              await userProvider.create(
-                user: User(
-                  name: name,
-                  type: type,
-                ),
-              );
-              if (!mounted) return;
               readAll();
-              Navigator.of(context).pop();
-            },
-          ),
-        );
       },
     );
   }
