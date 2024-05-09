@@ -14,7 +14,7 @@ class GameProvider {
         'name' TEXT,
         'icon' INTEGER,
         'description' TEXT,
-        PRIMARY KEY('id' AUTOINCREMENT)
+        PRIMARY KEY('id')
       );
       """);
   }
