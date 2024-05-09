@@ -10,6 +10,7 @@ class ReportProvider {
     await database.execute("""
       CREATE TABLE IF NOT EXISTS $tableName (
         'id' INTEGER,
+        'createdOn' INTEGER DEFAULT (strftime('%s', 'now')),
         'userName' TEXT,
         PRIMARY KEY('id' AUTOINCREMENT)
       );

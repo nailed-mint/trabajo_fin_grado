@@ -213,6 +213,7 @@ class _MatchTheSilhouetteBoardState extends State<MatchTheSilhouetteBoard> {
     );
     Match match = Match(
       gameId: 2,
+      createdOn: DateTime.now(),
       duration: duration.inSeconds,
       hits: hits,
       errors: errors,

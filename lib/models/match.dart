@@ -1,6 +1,6 @@
 class Match {
   final int? id;
-  final int? userId;
+  final DateTime? createdOn;
   final int? gameId;
   final int? reportId;
   final int? duration;
@@ -9,7 +9,7 @@ class Match {
 
   const Match({
     this.id,
-    this.userId,
+    this.createdOn,
     this.gameId,
     this.reportId,
     this.duration,
@@ -19,7 +19,8 @@ class Match {
 
   factory Match.fromSqfliteDatabase(Map<String, dynamic> map) => Match(
         id: map['id']?.toInt() ?? 0,
-        userId: map['userId']?.toInt() ?? 0,
+        createdOn:
+            DateTime.fromMillisecondsSinceEpoch((map['createdOn'] ?? 0) * 1000),
         gameId: map['gameId']?.toInt() ?? 0,
         reportId: map['reportId']?.toInt() ?? 0,
         duration: map['duration']?.toInt() ?? -1,
@@ -30,7 +31,7 @@ class Match {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'userId': userId,
+      'createdOn': (createdOn?.millisecondsSinceEpoch ?? 1) ~/ 1000,
       'gameId': gameId,
       'reportId': reportId,
       'duration': duration,

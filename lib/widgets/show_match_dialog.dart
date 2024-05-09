@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trabajo_fin_grado/models/match.dart';
 
 class ShowMatchInfo extends StatelessWidget {
@@ -19,6 +20,10 @@ class ShowMatchInfo extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text("id: ${match.id.toString()}"),
+            Text("gameId: ${match.gameId.toString()}"),
+            Text(
+              "createdOn: ${DateFormat('dd-MM-yyy').format(match.createdOn!)}",
+            ),
             Text("duration: ${match.duration.toString()}"),
             Text("hits: ${match.hits.toString()}"),
             Text("errors: ${match.errors.toString()}"),

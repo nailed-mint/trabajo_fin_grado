@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trabajo_fin_grado/models/report.dart';
 
 class ShowReportInfo extends StatelessWidget {
@@ -19,7 +20,10 @@ class ShowReportInfo extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text("id: ${report.id.toString()}"),
-            Text("userId: ${report.userId.toString()}")
+            Text(
+              "created on: ${DateFormat('dd-MM-yyy').format(report.createdOn!)}",
+            ),
+            Text("userName: ${report.userName.toString()}")
           ],
         ),
       ),

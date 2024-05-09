@@ -267,6 +267,7 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
     );
     Match match = Match(
       gameId: 1,
+      createdOn: DateTime.now(),
       duration: duration.inSeconds,
       hits: hits,
       errors: errors,
