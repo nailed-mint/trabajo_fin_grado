@@ -1,27 +1,26 @@
 class Report {
   final int? id;
   final DateTime? createdOn;
-  final String? emissionDate;
+  final String? userName;
 
   const Report({
     this.id,
     this.createdOn,
-    this.emissionDate,
+    this.userName,
   });
 
   factory Report.fromSqfliteDatabase(Map<String, dynamic> map) => Report(
         id: map['id']?.toInt() ?? 0,
         createdOn:
             DateTime.fromMillisecondsSinceEpoch((map['createdOn'] ?? 0) * 1000),
-        userId: map['userId']?.toInt() ?? 0,
-        emissionDate: map['emissionDate'] ?? '',
+        userName: map['userName']?.toString() ?? '',
       );
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'createdOn': (createdOn?.millisecondsSinceEpoch ?? 1) ~/ 1000,
-      'emissionDate': emissionDate,
+      'userName': userName,
     };
   }
 }
