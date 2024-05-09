@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:trabajo_fin_grado/models/match.dart';
 import 'package:trabajo_fin_grado/providers/match_provider.dart';
+import 'package:trabajo_fin_grado/screens/result_screen.dart';
 import 'package:trabajo_fin_grado/utils/json_util.dart';
 import 'package:trabajo_fin_grado/widgets/invisible_button.dart';
 
@@ -273,7 +274,13 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
       errors: errors,
     );
     await MatchProvider().create(match: match);
-    // TODO: navigate to result screen
+    // navigate to result screen
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ResultScreen()),
+      );
+    }
   }
 }
 
