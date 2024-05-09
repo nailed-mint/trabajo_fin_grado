@@ -153,6 +153,19 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
               ),
             ),
           ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(30),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "¡Encuentra las ${totalHits - hits} diferencias!",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ),
         body: SafeArea(
           child: Expanded(
