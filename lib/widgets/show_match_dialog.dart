@@ -27,6 +27,7 @@ class ShowMatchInfo extends StatelessWidget {
             Text("duration: ${match.duration.toString()}"),
             Text("hits: ${match.hits.toString()}"),
             Text("errors: ${match.errors.toString()}"),
+            Text("reportId: ${match.reportId.toString()}"),
           ],
         ),
       ),

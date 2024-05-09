@@ -150,10 +150,10 @@ class _DataListState extends State<DataList> {
 
                     return ListTile(
                       title: Text(
-                        match.gameId.toString(),
+                        "gameId: ${match.gameId.toString()}",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text(match.duration.toString()),
+                      subtitle: Text("Duration: ${match.duration.toString()}"),
                       onTap: () {
                         showDialog(
                           context: context,
@@ -248,7 +248,7 @@ class _DataListState extends State<DataList> {
                         "userName: ${report.userName.toString()}",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text(report.id.toString()),
+                      subtitle: Text("id: ${report.id.toString()}"),
                       onTap: () {
                         showDialog(
                           context: context,
