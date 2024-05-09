@@ -172,9 +172,6 @@ class _MatchTheSilhouetteBoardState extends State<MatchTheSilhouetteBoard> {
     setState(() {
       hits++;
     });
-
-    checkEndGame() ? await endGame() : null;
-
     await audioPlayer.play(
       AssetSource('sfx/607207__fupicat__congrats.wav'),
     );
