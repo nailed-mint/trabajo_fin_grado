@@ -77,36 +77,56 @@ class _DataListState extends State<DataList> {
             ],
           ),
           floatingActionButton: refreshDataList(context),
+          bottomNavigationBar: BottomAppBar(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => CreateUserWidget(
-                            user: user,
-                            onSubmit: (name, type) async {
-                              await userProvider.update(
-                                user: User(
-                                  id: user.id,
-                                  name: name,
-                                  type: type,
-                                  email: user.email,
-                                ),
-                              );
-                              readAll();
-                              if (!mounted) return;
+                        builder: (context) => AlertDialog(
+                          title: const Text('Borrar partidas'),
+                          content: const Text(
+                            '¿Quieres eliminar todas las partidas del día de hoy?',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                // Perform delete operation here
+                                DateTime today = DateTime(
+                                  DateTime.now().year,
+                                  DateTime.now().month,
+                                  DateTime.now().day,
+                                );
+                                matchProvider.deleteByDate(today);
+                                setState(() {
+                                  futureMatches = matchProvider.readAll();
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Sí'),
+                            ),
+                            TextButton(
+                              onPressed: () {
                               Navigator.of(context).pop();
                             },
+                              child: const Text('No'),
+                            ),
+                          ],
                           ),
                         );
                       },
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 12),
-                  itemCount: users.length,
-                );
-        }
-      },
-    );
-  }
+                    child: const Text('Borrar partidas'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
 
   FutureBuilder<List<Match>> matchList() {
     return FutureBuilder<List<Match>>(
@@ -140,6 +160,16 @@ class _DataListState extends State<DataList> {
                           builder: (context) => ShowMatchInfo(match: match),
                         );
                       },
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete_forever,
+                            color: Colors.redAccent),
+                        onPressed: () {
+                          matchProvider.delete(match.id!);
+                          setState(() {
+                            futureMatches = matchProvider.readAll();
+                          });
+                        },
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) =>
