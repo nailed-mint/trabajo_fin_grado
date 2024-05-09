@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trabajo_fin_grado/screens/data_list.dart';
 import 'package:trabajo_fin_grado/screens/game_selector.dart';
+import 'package:trabajo_fin_grado/screens/welcome.dart';
 
 class SidenavDrawer extends StatelessWidget {
   const SidenavDrawer({super.key});
@@ -22,9 +23,20 @@ class SidenavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            title: const Text("Menú principal"),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WelcomeScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
             title: const Text("Selector de juego"),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const GameSelector(),
@@ -33,7 +45,7 @@ class SidenavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text("[TEMP] Visualización de datos"),
+            title: const Text("Visualización de datos"),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushReplacement(
