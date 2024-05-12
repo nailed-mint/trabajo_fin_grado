@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:trabajo_fin_grado/models/game.dart';
 import 'package:trabajo_fin_grado/models/match.dart';
@@ -5,7 +7,8 @@ import 'package:trabajo_fin_grado/models/report.dart';
 import 'package:trabajo_fin_grado/providers/game_provider.dart';
 import 'package:trabajo_fin_grado/providers/match_provider.dart';
 import 'package:trabajo_fin_grado/providers/report_provider.dart';
-import 'package:trabajo_fin_grado/widgets/create_user_dialog.dart';
+import 'package:trabajo_fin_grado/services/pdf_report_service.dart';
+import 'package:trabajo_fin_grado/widgets/create_report_dialog.dart';
 import 'package:trabajo_fin_grado/widgets/show_game_info.dart';
 import 'package:trabajo_fin_grado/widgets/show_match_dialog.dart';
 import 'package:trabajo_fin_grado/widgets/show_report_dialog.dart';
@@ -25,6 +28,8 @@ class _DataListState extends State<DataList> {
   final gameProvider = GameProvider();
   final matchProvider = MatchProvider();
   final reportProvider = ReportProvider();
+
+  final pdfReportService = PdfReportService();
 
   @override
   void initState() {
@@ -85,8 +90,8 @@ class _DataListState extends State<DataList> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                        showDialog(
-                          context: context,
+                      showDialog(
+                        context: context,
                         builder: (context) => AlertDialog(
                           title: const Text('Borrar partidas'),
                           content: const Text(
@@ -111,15 +116,25 @@ class _DataListState extends State<DataList> {
                             ),
                             TextButton(
                               onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                                Navigator.of(context).pop();
+                              },
                               child: const Text('No'),
                             ),
                           ],
-                          ),
-                        );
-                      },
+                        ),
+                      );
+                    },
                     child: const Text('Borrar partidas'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Call the delete match function
+                      showDialog(
+                        context: context,
+                        builder: (context) => CreateReportDialog(),
+                      );
+                    },
+                    child: const Text('Crear informe'),
                   ),
                 ],
               ),
@@ -129,6 +144,10 @@ class _DataListState extends State<DataList> {
       );
 
   FutureBuilder<List<Match>> matchList() {
+    // FIXME: Mostrar solo las partidas sin informe?
+    // Así evitamos borrar partidas relacionadas
+    // (No pasaría nada por borrarlas, pero igual suena un poco raro que un
+    //  informe hable de partidas que no están almacenadas en ningún sitio)
     return FutureBuilder<List<Match>>(
       future: futureMatches,
       builder: (context, snapshot) {
@@ -255,6 +274,31 @@ class _DataListState extends State<DataList> {
                           builder: (context) => ShowReportInfo(report: report),
                         );
                       },
+                      trailing: IconButton(
+                        onPressed: () async {
+                          // Generate pdf data
+                          final Map<String, dynamic> reportBuild =
+                              await pdfReportService.buildReport(
+                            report: report,
+                          );
+
+                          // Generate pdf
+                          final Uint8List data =
+                              await pdfReportService.createDocument(
+                            data: reportBuild,
+                          );
+
+                          // Save and open file in device
+                          pdfReportService.savePdfFile(
+                            fileName:
+                                "${reportBuild['date']}_${reportBuild['name']}",
+                            data: data,
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.picture_as_pdf,
+                        ),
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) =>
@@ -270,7 +314,7 @@ class _DataListState extends State<DataList> {
     return FloatingActionButton(
       child: const Icon(Icons.refresh),
       onPressed: () {
-              readAll();
+        readAll();
       },
     );
   }

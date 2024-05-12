@@ -54,6 +54,17 @@ class MatchProvider {
     return matches.map((e) => Match.fromSqfliteDatabase(e)).toList();
   }
 
+  Future<List<Match>> readByReportId(int reportId) async {
+    final database = await DatabaseService().database;
+    final matches = await database.query(
+      tableName,
+      where: 'reportId = ?',
+      whereArgs: [reportId],
+      orderBy: 'gameId, createdOn',
+    );
+    return matches.map((e) => Match.fromSqfliteDatabase(e)).toList();
+  }
+
   Future<List<Match>> readUnreported() async {
     final database = await DatabaseService().database;
     final matches = await database.query(
