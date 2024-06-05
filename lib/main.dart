@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:trabajo_fin_grado/screens/welcome.dart';
 
-import 'package:trabajo_fin_grado/screens/my_scaffold.dart';
-
-void main() {
-  /// Takes the given Widget and makes it the root of the widget tree.
-  ///
-  /// The framework forces the root widget to cover the screen
-  runApp(
-    const MaterialApp(
-      title: "My app", // title used by OS's Task Switcher
-      home: SafeArea(child: MyScaffold()),
-    )
-  );
+void main() async {
+  runApp(const MainApp());
 }
 
+class MainApp extends StatefulWidget {
+  const MainApp({super.key});
+
+  @override
+  MainAppState createState() => MainAppState();
+}
+
+class MainAppState extends State<MainApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyanAccent),
+      ),
+      home: const Scaffold(
+        body: Center(
+          child: WelcomeScreen(),
+        ),
+      ),
+    );
+  }
+}

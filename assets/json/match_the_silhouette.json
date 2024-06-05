@@ -1,0 +1,20 @@
+{
+  "levels": [
+    {
+      "colorPath": "assets/img/mts/bearC.jpg",
+      "silhouettePath": "assets/img/mts/bearS.jpg"
+    },
+    {
+      "colorPath": "assets/img/mts/deerC.jpg",
+      "silhouettePath": "assets/img/mts/deerS.jpg"
+    },
+    {
+      "colorPath": "assets/img/mts/lionC.jpg",
+      "silhouettePath": "assets/img/mts/lionS.jpg"
+    },
+    {
+      "colorPath": "assets/img/mts/rabbitC.jpg",
+      "silhouettePath": "assets/img/mts/rabbitS.jpg"
+    }
+  ]
+}
