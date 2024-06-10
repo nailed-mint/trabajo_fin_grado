@@ -49,16 +49,13 @@ class _DataListState extends State<DataList> {
   @override
   Widget build(BuildContext context) => DefaultTabController(
         initialIndex: 0,
-        length: 3,
+        length: 2,
         child: Scaffold(
           drawer: const SidenavDrawer(),
           appBar: AppBar(
             title: const Text('Visualización de Datos'),
             bottom: const TabBar(
               tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.gamepad),
-                ),
                 Tab(
                   icon: Icon(Icons.history),
                 ),
@@ -70,9 +67,6 @@ class _DataListState extends State<DataList> {
           ),
           body: TabBarView(
             children: <Widget>[
-              Center(
-                child: gameList(),
-              ),
               Center(
                 child: matchList(),
               ),

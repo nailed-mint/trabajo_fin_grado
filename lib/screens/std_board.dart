@@ -25,7 +25,7 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
   // Score control variables
   int hits = 0;
   int errors = 0;
-  late int totalHits;
+  late int totalHits = 0;
 
   // Timer variables
   Duration duration = const Duration();
@@ -168,15 +168,19 @@ class _SpotTheDifferenceBoardState extends State<SpotTheDifferenceBoard> {
           ),
         ),
         body: SafeArea(
-          child: Expanded(
-            child: Center(
-              child: Column(
-                children: [
-                  Stack(children: imageA + invisibleButtons),
-                  Stack(children: imageB),
-                ],
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Stack(children: imageA + invisibleButtons),
+                      Stack(children: imageB),
+                    ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
